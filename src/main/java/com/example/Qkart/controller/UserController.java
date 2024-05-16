@@ -12,10 +12,11 @@ public class UserController {
 
     @PostMapping(path="/add")
     public @ResponseBody String addNewUser (@RequestParam String name
-            , @RequestParam String email) {
+            , @RequestParam String email,@RequestParam String password) {
         User n = new User();
         n.setName(name);
         n.setEmail(email);
+        n.setPassword(password);
         userRepository.save(n);
         return "Saved";
     }
