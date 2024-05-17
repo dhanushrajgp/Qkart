@@ -1,11 +1,13 @@
 package com.example.Qkart.entities;
 
 import com.example.Qkart.globals.Role;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import net.minidev.json.annotate.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -18,6 +20,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@JsonIgnoreProperties({"password"})
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
@@ -27,6 +30,7 @@ public class User implements UserDetails {
 
     private String email;
 
+    @JsonIgnore
     private String password;
 
     @Enumerated(EnumType.STRING)
@@ -42,9 +46,13 @@ public class User implements UserDetails {
         return password;
     }
 
+    public int getId() {
+        return id;
+    }
+
     @Override
     public String getUsername() {
-        return name;
+        return email;
     }
 
     @Override
