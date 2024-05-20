@@ -1,5 +1,6 @@
 package com.example.Qkart.config;
 
+import com.example.Qkart.globals.Role;
 import jakarta.servlet.Filter;
 import lombok.RequiredArgsConstructor;
 import org.jetbrains.annotations.NotNull;
@@ -30,6 +31,8 @@ public class SecurityConfiguration {
                 .csrf()
                 .disable()
                 .authorizeHttpRequests()
+                .requestMatchers("/api/v1/admin/**")
+                .hasAnyAuthority("ADMIN")
                 .requestMatchers("/api/v1/auth/**","/login")
                 .permitAll()
                 .anyRequest()

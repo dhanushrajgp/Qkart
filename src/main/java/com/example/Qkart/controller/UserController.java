@@ -6,13 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(path="/user")
+@RequestMapping(path="/api/v1/admin/users")
 public class UserController {
 
     @Autowired
     private UserRepository userRepository;
 
-    @GetMapping(path="/all")
+    @GetMapping(path="/")
     public @ResponseBody UsersResponse getAllUsers() {
         // This returns a JSON or XML with the users
         return new UsersResponse(userRepository.findAll());
